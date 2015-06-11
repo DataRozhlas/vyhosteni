@@ -1,12 +1,14 @@
 class ig.Vyhosteni
   (@parentElement) ->
     @data = @getData!
+    console.log @data.0
     @scale = d3.scale.linear!
       ..domain [0 4754]
-      ..range [0 70]
+      ..range [0 55]
     @parentElement.append \ol
       ..attr \class \vyhosteni
       ..selectAll \li .data @data .enter!append \li
+        ..style \top (d, i) -> "#{i * 30}px"
         ..append \span
           ..attr \class \title
           ..html -> it.country
@@ -22,12 +24,30 @@ class ig.Vyhosteni
                 if i == 0
                   t += " vyhoštěných"
                 t
+        ..append \div
+          ..attr \class \details
+          ..selectAll \div.col .data (.years) .enter!append \div.col
+            ..attr \class \col
+            ..append \div
+              ..attr \class \line
+              ..style \bottom -> "#{it.scaled * 100}%"
+              ..html (.value)
+            ..append \span
+              ..attr \class \year
+              ..html (.year)
 
   getData: ->
     @data = d3.tsv.parse ig.data.vyhosteni, (row) ->
       row.total = 0
-      for i in [2010 to 2014]
+      max = -Infinity
+      row.years = for i in [2010 to 2014]
         row[i] = parseInt row[i], 10
+        max = row[i] if row[i] > max
         row.total += row[i]
+        {year: i, value: row[i]}
+      row.scale = d3.scale.linear!
+        ..domain [0 max]
+      for year in row.years
+        year.scaled = row.scale year.value
       row
 

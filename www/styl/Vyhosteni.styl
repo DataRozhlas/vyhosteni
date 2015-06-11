@@ -3,17 +3,21 @@ ol.vyhosteni
   list-style-type none
   margin 10px
   padding 0px
+  position relative
+  top 60px
   li:nth-child(20) ~ li
     display none
   li
-    padding 0px
-    position relative
-    margin-bottom 10px
-    height 20px
+    position absolute
+    width 610px
+    height 30px
     div.bar-container
+      position absolute
+      bottom 0px
+      left 140px
       float left
-      width 100%
-      padding-left 140px
+      width (610px - 140)
+      height 25px
     div.bar
       position absolute
       height 18px
@@ -32,5 +36,42 @@ ol.vyhosteni
     span.title
       position absolute
       width 140px
+      bottom 7px
       padding-right 10px
       text-align right
+    div.details
+      position absolute
+      bottom 40px
+      left 134px
+      width (610px - @left)
+      .col
+        float left
+        width 36px
+        height 35px
+        font-size 11px
+        text-align center
+        position relative
+        .line
+          position absolute
+          width 100%
+          left 0px
+          text-decoration underline
+        .year
+          position absolute
+          bottom -12px
+          width 100%
+          left 0px
+  li
+    transform translate(0, -60px)
+    transition transform 0.4s, height 0.4s
+    div.details
+      opacity 0
+      transition opacity 0.4s
+  li:hover
+    height 90px
+    span.title
+      font-weight bold
+    div.details
+      opacity 1
+  li:hover ~ li
+    transform translate(0)
