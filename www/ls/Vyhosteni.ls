@@ -5,7 +5,7 @@ class ig.Vyhosteni
     @scale = d3.scale.linear!
       ..domain [0 4754]
       ..range [0 55]
-    @parentElement.append \ol
+    @element = @parentElement.append \ol
       ..attr \class \vyhosteni
       ..selectAll \li .data @data .enter!append \li
         ..style \top (d, i) -> "#{i * 30}px"
@@ -35,6 +35,12 @@ class ig.Vyhosteni
             ..append \span
               ..attr \class \year
               ..html (.year)
+    @moreButton = @parentElement.append \button
+      ..attr \class \more-button
+      ..on \click ~>
+        @element.classed \all yes
+        @moreButton.remove!
+      ..html "Zobrazit další"
 
   getData: ->
     @data = d3.tsv.parse ig.data.vyhosteni, (row) ->

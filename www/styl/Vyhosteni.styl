@@ -4,8 +4,10 @@ ol.vyhosteni
   margin 10px
   padding 0px
   position relative
-  top 60px
-  li:nth-child(20) ~ li
+  margin-top 60px
+  height 290px
+  float left
+  li:nth-child(10) ~ li
     display none
   li
     position absolute
@@ -21,9 +23,13 @@ ol.vyhosteni
     div.bar
       position absolute
       height 18px
-      background black
+      border-right 2px solid #8
+      border-top 1px solid #c
+      border-bottom 1px solid #c
       border-top-right-radius 5px
       border-bottom-right-radius 5px
+      background white
+      transition background 0.4s
       .count
         display block
         position absolute
@@ -73,5 +79,26 @@ ol.vyhosteni
       font-weight bold
     div.details
       opacity 1
+    div.bar
+      background #e
+      // border-top 1px solid #3
+      // border-bottom 1px solid #3
   li:hover ~ li
     transform translate(0)
+ol.vyhosteni.all
+  li:nth-child(10) ~ li
+    display list-item
+  li:nth-child(30) ~ li
+    display none
+button.more-button
+  float left
+  margin-left 150px
+  width (610px - 150px)
+  background white
+  font-family Roboto, sans-serif
+  padding 6px 10px
+  border 1px dashed #b
+  color #6
+  &:hover
+    background #fa
+    cursor pointer
