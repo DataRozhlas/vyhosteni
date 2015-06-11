@@ -1,0 +1,36 @@
+ol.vyhosteni
+  width 610px
+  list-style-type none
+  margin 10px
+  padding 0px
+  li:nth-child(20) ~ li
+    display none
+  li
+    padding 0px
+    position relative
+    margin-bottom 10px
+    height 20px
+    div.bar-container
+      float left
+      width 100%
+      padding-left 140px
+    div.bar
+      position absolute
+      height 18px
+      background black
+      border-top-right-radius 5px
+      border-bottom-right-radius 5px
+      .count
+        display block
+        position absolute
+        font-size 13px
+        font-weight bold
+        left 100%
+        padding-left 10px
+        color black
+        white-space nowrap
+    span.title
+      position absolute
+      width 140px
+      padding-right 10px
+      text-align right
