@@ -1,7 +1,7 @@
 ol.vyhosteni
-  width 610px
+  width (485px + 296px)
   list-style-type none
-  margin 10px
+  margin-left (296px - 140px)
   padding 0px
   position relative
   margin-top 60px
@@ -68,7 +68,7 @@ ol.vyhosteni
           width 100%
           left 0px
   li
-    transform translate(0, -60px)
+    transform translate(0)
     transition transform 0.4s, height 0.4s
     div.details
       opacity 0
@@ -81,24 +81,29 @@ ol.vyhosteni
       opacity 1
     div.bar
       background #e
-      // border-top 1px solid #3
-      // border-bottom 1px solid #3
-  li:hover ~ li
-    transform translate(0)
+  &:hover
+    li
+      transform translate(0, -60px)
+    li:hover ~ li
+      transform translate(0)
 ol.vyhosteni.all
+  height 900px
+  background yellow
   li:nth-child(10) ~ li
     display list-item
   li:nth-child(30) ~ li
     display none
 button.more-button
   float left
-  margin-left 150px
-  width (610px - 150px)
+  margin-left (296px)
+  width 485px
   background white
   font-family Roboto, sans-serif
   padding 6px 10px
   border 1px dashed #b
   color #6
+  margin-top 10px
+  margin-bottom 30px
   &:hover
     background #fa
     cursor pointer

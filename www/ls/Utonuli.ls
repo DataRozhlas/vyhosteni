@@ -72,8 +72,9 @@ class ig.Utonuli
       * @element.node!
       * minZoom: 3,
         maxZoom: 7,
-        zoom: 3,
+        zoom: 4,
         center: [29, 15.5]
+        scrollWheelZoom: no
     baseLayer = L.tileLayer do
       * "https://samizdat.cz/tiles/ton_b1/{z}/{x}/{y}.png"
       * zIndex: 1

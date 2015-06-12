@@ -11,6 +11,7 @@ externalStyles =
   ...
 
 externalData =
+  "style": "#__dirname/www/screen.css"
   "vyhosteni": "#__dirname/data/vyhosteni_fixed.tsv"
   "utonuli": "#__dirname/data/utonuli.geojson"
 
