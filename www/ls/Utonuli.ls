@@ -39,11 +39,11 @@ class ig.Utonuli
         marker
           ..bindPopup switch
             | feature.properties.deaths == 1
-              "Na tomto místě utonul <b>#{feature.properties.deaths}</b> člověk"
+              "Na tomto místě od roku 2000 zemřel <b>#{feature.properties.deaths}</b> člověk"
             | 1 < feature.properties.deaths < 5
-              "Na tomto místě utonuli <b>#{feature.properties.deaths}</b> lidé"
+              "Na tomto místě od roku 2000 zemřeli <b>#{feature.properties.deaths}</b> lidé"
             | otherwise
-              "Na tomto místě utonulo <b>#{ig.utils.formatNumber feature.properties.deaths}</b> lidí"
+              "Na tomto místě od roku 2000 zemřelo <b>#{ig.utils.formatNumber feature.properties.deaths}</b> lidí"
           ..addTo @map
         incident = feature.properties
         {point, marker, incident}
@@ -77,6 +77,7 @@ class ig.Utonuli
     baseLayer = L.tileLayer do
       * "https://samizdat.cz/tiles/ton_b1/{z}/{x}/{y}.png"
       * zIndex: 1
+        opacity: 0.3
         attribution: 'CC BY-NC-SA <a href="http://rozhlas.cz">Rozhlas.cz</a>. Data <a href="https://www.czso.cz/" target="_blank">ČSÚ</a>, mapová data &copy; <a target="_blank" href="http://osm.org">OpenStreetMap</a>, podkres <a target="_blank" href="http://stamen.com">Stamen</a>, <a target="_blank" href="https://samizdat.cz">Samizdat</a>'
 
     labelLayer = L.tileLayer do
