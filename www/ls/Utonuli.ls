@@ -8,8 +8,19 @@ class ig.Utonuli
       ..domain [0 29986]
       ..range [1 70]
 
-    console.log d3.extent @data.features.map (.properties.deaths)
-    @markers = @data.features
+    @setPoints!
+    @setVoronoi!
+    @map.on \zoomend @~setMarkerRadii
+
+  setMarkerRadii: ->
+    zoom = @map.getZoom!
+    zoomFromStart = Math.max 0, zoom - 3
+    @radiusScale.range [2 ^ zoomFromStart, 70 * (zoomFromStart || 1)]
+    @points.forEach ~>
+      it.marker.setRadius @radiusScale it.incident.deaths
+
+  setPoints: ->
+    @points = @data.features
       .filter -> it.geometry
       .sort (a, b) -> b.properties.deaths - a.properties.deaths
       .map (feature) ~>
@@ -17,18 +28,44 @@ class ig.Utonuli
         [lon, lat] = feature.geometry.coordinates
         options =
           color: \#ab0000
-          fillOpacity: 0.8
+          fillOpacity: 0.6
           stroke: no
           radius: @radiusScale feature.properties.deaths
-
-        circle = L.circleMarker do
-          [lat, lon]
+        latLng = L.latLng [lat, lon]
+        point = L.Projection.SphericalMercator.project latLng
+        marker = L.circleMarker do
+          latLng
           options
-        circle.addTo @map
-        circle
+        marker
+          ..bindPopup switch
+            | feature.properties.deaths == 1
+              "Na tomto místě utonul <b>#{feature.properties.deaths}</b> člověk"
+            | 1 < feature.properties.deaths < 5
+              "Na tomto místě utonuli <b>#{feature.properties.deaths}</b> lidé"
+            | otherwise
+              "Na tomto místě utonulo <b>#{ig.utils.formatNumber feature.properties.deaths}</b> lidí"
+          ..addTo @map
+        incident = feature.properties
+        {point, marker, incident}
 
-    console.log @data
-
+  setVoronoi: ->
+    voronoi = d3.geom.voronoi!
+      ..x ~> it.point.x
+      ..y ~> it.point.y
+      ..clipExtent [[-Math.PI, -Math.PI], [Math.PI, Math.PI]]
+    polygons = voronoi @points
+      .filter -> it
+    polygons.forEach (polygon) ~>
+      latLngs = for point in polygon
+        L.Projection.SphericalMercator.unproject L.point point
+      polygon.point.voronoiPath = latLngs
+      polygon.point.voronoiPolygon = L.polygon latLngs, {stroke: no, fillColor: \transparent}
+        ..on \mouseover ~>
+          polygon.point.marker.openPopup!
+          polygon.point.marker.setStyle color: \#fa0000, fillOpacity: 1
+        ..on \mouseout ~>
+          polygon.point.marker.setStyle color: \#ab0000, fillOpacity: 0.6
+        ..addTo @map
 
   prepareMap: ->
     @map = L.map do
