@@ -2,13 +2,12 @@ class ig.VyhosteniStaty
   (@parentElement) ->
     @data = @getData!
     @scale = d3.scale.linear!
-      ..domain [0 4754]
+      ..domain [0 48 / 1e4]
       ..range [0 55]
     @element = @parentElement.append \ol
-      ..attr \class \vyhosteni
+      ..attr \class "vyhosteni staty"
       ..selectAll \li .data @data .enter!append \li
         ..style \top (d, i) -> "#{i * 30}px"
-        ..style \z-index (d, i) -> 100 - i
         ..append \span
           ..attr \class \title
           ..html -> it.country
@@ -16,53 +15,29 @@ class ig.VyhosteniStaty
           ..attr \class \bar-container
           ..append \div
             ..attr \class \bar
-            ..style \width ~> "#{@scale it.total}%"
+            ..style \width ~> "#{@scale it.rate}%"
             ..append \span
               ..attr \class \count
               ..html (d, i) ->
-                t = ig.utils.formatNumber d.total
+                t = ig.utils.formatNumber d.rate * 1e4, 2
                 if i == 0
-                  t += " vyhoštěných"
-                t += " <span>("
-                t += ig.utils.formatNumber d.totalDeportace
-                if i == 0
-                  t += " deportovaných"
-                t += ")</span>"
+                  t += " vyhoštěných na 1 000 obyv."
                 t
-          ..append \div
-            ..attr \class "bar deportace"
-            ..style \width ~> "#{@scale it.totalDeportace}%"
-        ..append \div
-          ..attr \class \details
-          ..selectAll \div.col .data (.years) .enter!append \div.col
-            ..attr \class \col
-            ..append \div
-              ..attr \class \line
-              ..style \bottom -> "#{it.scaled * 100}%"
-              ..html (.value)
-            ..append \span
-              ..attr \class \year
-              ..html (.year)
-    @moreButton = @parentElement.append \button
-      ..attr \class \more-button
-      ..on \click ~>
-        @element.classed \all yes
-        @moreButton.remove!
-      ..html "Zobrazit další"
 
   getData: ->
-    dataAssoc = []
-    @data = d3.tsv.parse ig.data.vyhosteni, (row) ->
-      row.total = 0
-      max = -Infinity
-      row.years = for i in [2010 to 2014]
+    data = d3.tsv.parse ig.data['deportace-eu'], (row) ->
+      validValues = 0
+      sum = 0
+      row.population = parseInt row.population, 10
+      row.years = for i in [2008 to 2014]
         row[i] = parseInt row[i], 10
-        max = row[i] if row[i] > max
-        row.total += row[i]
+        unless isNaN row[i]
+          sum += row[i]
+          validValues++
         {year: i, value: row[i]}
-      row.scale = d3.scale.linear!
-        ..domain [0 max]
-      for year in row.years
-        year.scaled = row.scale year.value
-      dataAssoc[row.country] = row
+      row.average = sum / validValues
+      row.rate = row.average / row.population
       row
+
+    data.sort (a, b) -> a.rate - b.rate
+    data

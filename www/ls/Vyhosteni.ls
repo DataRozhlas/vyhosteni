@@ -51,14 +51,15 @@ class ig.Vyhosteni
       ..html "Zobrazit další"
 
   getData: ->
-    dataAssoc = []
-    @data = d3.tsv.parse ig.data.vyhosteni, (row) ->
+    dataAssoc = {}
+    data = d3.tsv.parse ig.data.vyhosteni, (row) ->
       row.total = 0
       max = -Infinity
       row.years = for i in [2010 to 2014]
         row[i] = parseInt row[i], 10
         max = row[i] if row[i] > max
         row.total += row[i]
+        row.totalDeportace = 0
         {year: i, value: row[i]}
       row.scale = d3.scale.linear!
         ..domain [0 max]
@@ -75,6 +76,6 @@ class ig.Vyhosteni
         datum.totalDeportace += (row[i] || 0)
         {year: i, value: row[i]}
 
-    @data
+    data
 
 

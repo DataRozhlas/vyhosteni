@@ -36,6 +36,7 @@ ol.vyhosteni
       .count
         display block
         position absolute
+        top -1px
         font-size 13px
         font-weight bold
         left 100%
@@ -115,3 +116,18 @@ button.more-button
   &:hover
     background #fa
     cursor pointer
+ol.vyhosteni.staty
+  height 930px
+  margin-top 0px
+  li
+    height 30px
+    display list-item !important
+    transform none !important
+    span.title
+      font-weight normal
+    &:first-child span.title
+      font-weight bold
+    &:hover
+      transform none !important
+      div.bar
+        background #FFF
