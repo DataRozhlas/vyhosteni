@@ -68,13 +68,14 @@ ol.vyhosteni
           width 100%
           left 0px
   li
-    transform translate(0)
+    transform translate(0, -60px)
     transition transform 0.4s, height 0.4s
+    height 90px
     div.details
       opacity 0
       transition opacity 0.4s
   li:hover
-    height 90px
+    z-index 101 !important
     span.title
       font-weight bold
     div.details
@@ -83,9 +84,10 @@ ol.vyhosteni
       background #e
   &:hover
     li
-      transform translate(0, -60px)
+      transform translate(0, -120px)
+    li:hover
     li:hover ~ li
-      transform translate(0)
+      transform translate(0, -60px)
 ol.vyhosteni.all
   height 900px
   background yellow

@@ -9,6 +9,7 @@ class ig.Vyhosteni
       ..attr \class \vyhosteni
       ..selectAll \li .data @data .enter!append \li
         ..style \top (d, i) -> "#{i * 30}px"
+        ..style \z-index (d, i) -> 100 - i
         ..append \span
           ..attr \class \title
           ..html -> it.country
