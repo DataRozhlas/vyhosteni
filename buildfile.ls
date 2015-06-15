@@ -13,6 +13,7 @@ externalStyles =
 externalData =
   "style": "#__dirname/www/screen.css"
   "vyhosteni": "#__dirname/data/vyhosteni_fixed.tsv"
+  "deportace": "#__dirname/data/deportace_fixed.tsv"
   "utonuli": "#__dirname/data/utonuli.geojson"
 
 preferScripts = <[ postInit.js _loadData.js ../data.js init.js _loadExternal.js]>

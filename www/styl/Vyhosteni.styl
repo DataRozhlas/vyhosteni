@@ -30,6 +30,9 @@ ol.vyhosteni
       border-bottom-right-radius 5px
       background white
       transition background 0.4s
+      &.deportace
+        background #f0
+        border-right-color #a
       .count
         display block
         position absolute
@@ -39,6 +42,10 @@ ol.vyhosteni
         padding-left 10px
         color black
         white-space nowrap
+        span
+          color #7
+          font-weight normal
+          font-style italic
     span.title
       position absolute
       width 140px
@@ -90,7 +97,6 @@ ol.vyhosteni
       transform translate(0, -60px)
 ol.vyhosteni.all
   height 900px
-  background yellow
   li:nth-child(10) ~ li
     display list-item
   li:nth-child(30) ~ li

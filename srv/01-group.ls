@@ -1,5 +1,5 @@
 require! fs
-data = fs.readFileSync "#__dirname/../data/vyhosteni.tsv" .toString!split "\n"
+data = fs.readFileSync "#__dirname/../data/deportace.tsv" .toString!split "\n"
   ..pop!
   ..shift!
 
@@ -14,4 +14,4 @@ for datum in data
 out = for country, values of countries_assoc
   ([country] ++ values).join "\t"
 out.unshift "country\t2010\t2011\t2012\t2013\t2014"
-fs.writeFileSync "#__dirname/../data/vyhosteni_countries.tsv", out.join "\n"
+fs.writeFileSync "#__dirname/../data/deportace_countries.tsv", out.join "\n"

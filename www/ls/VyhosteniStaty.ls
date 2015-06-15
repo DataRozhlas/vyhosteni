@@ -1,4 +1,4 @@
-class ig.Vyhosteni
+class ig.VyhosteniStaty
   (@parentElement) ->
     @data = @getData!
     @scale = d3.scale.linear!
@@ -66,15 +66,3 @@ class ig.Vyhosteni
         year.scaled = row.scale year.value
       dataAssoc[row.country] = row
       row
-    d3.tsv.parse ig.data.deportace, (row) ->
-      datum = dataAssoc[row.country]
-      datum.totalDeportace = 0
-      datum.yearsDeportace = for i in [2010 to 2014]
-        row[i] = parseInt row[i], 10
-        max = row[i] if row[i] > max
-        datum.totalDeportace += (row[i] || 0)
-        {year: i, value: row[i]}
-
-    @data
-
-
