@@ -16,6 +16,7 @@ externalData =
   "deportace": "#__dirname/data/deportace_fixed.tsv"
   "deportace-eu": "#__dirname/data/deportace-eu.tsv"
   "utonuli": "#__dirname/data/utonuli.geojson"
+  "moneytrail": "#__dirname/data/moneytrail.json"
 
 preferScripts = <[ postInit.js _loadData.js ../data.js init.js _loadExternal.js]>
 deferScripts = <[ geoUtils.js base.js ]>

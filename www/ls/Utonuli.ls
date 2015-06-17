@@ -39,11 +39,11 @@ class ig.Utonuli
         marker
           ..bindPopup switch
             | feature.properties.deaths == 1
-              "Na tomto místě od roku 2000 zemřel <b>#{feature.properties.deaths}</b> člověk"
+              "Na tomto místě od roku 2000 zahynul <b>#{feature.properties.deaths}</b> uprchlík"
             | 1 < feature.properties.deaths < 5
-              "Na tomto místě od roku 2000 zemřeli <b>#{feature.properties.deaths}</b> lidé"
+              "Na tomto místě od roku 2000 zahynuli <b>#{feature.properties.deaths}</b> uprchlíci"
             | otherwise
-              "Na tomto místě od roku 2000 zemřelo <b>#{ig.utils.formatNumber feature.properties.deaths}</b> lidí"
+              "Na tomto místě od roku 2000 zahynulo <b>#{ig.utils.formatNumber feature.properties.deaths}</b> uprchlíků"
           ..addTo @map
         incident = feature.properties
         {point, marker, incident}

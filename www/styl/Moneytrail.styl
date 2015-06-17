@@ -1,0 +1,61 @@
+.moneytrail
+  position relative
+  height 550px
+  clear left
+  margin-bottom 30px
+  .col
+    float left
+    width (100% / 7)
+    height 100%
+    position relative
+    .text
+      position absolute
+      margin-bottom 120px
+      margin-left -35%
+      width (100% - 2 * @margin-left)
+      opacity 0
+      background rgba(255,255,255,0.8)
+      z-index 2
+      padding 0px 5px
+      transition opacity 0.4s
+      pointer-events none
+    .title
+    .value
+      text-align center
+      width 100%
+      display block
+      position absolute
+    .title
+      font-weight bold
+      height 63px
+      bottom 0px
+    .value
+      bottom 0px
+    .area
+      position absolute
+      bottom 78px
+      width 60px
+      left 50%
+      margin-left (@width * -0.5)
+      border-top 2px solid #8
+      border-left 1px solid #c
+      border-right 1px solid #c
+      border-bottom 1px solid #d
+      background #fc
+      border-top-right-radius 5px
+      border-top-left-radius 5px
+      transition background-color 0.4s
+    &:hover
+      .text
+        opacity 1
+      .area
+        background lighten(desaturate(ColorBlue, 80%), 90%)
+    &:first-child
+      .text
+        margin-left 0px
+    &:last-child
+      .text
+        bottom 195px !important
+        right 50%
+
+

@@ -22,7 +22,7 @@ utils.deminifyData = (minified) ->
   out
 
 
-utils.formatNumber = (input, decimalPoints = 0) ->
+utils.formatNumber = (input, decimalPoints = 0, thousandSeparator, decimalSeparator) ->
   input = parseFloat input
   if decimalPoints
     wholePart = Math.floor input
@@ -31,14 +31,14 @@ utils.formatNumber = (input, decimalPoints = 0) ->
     if decimalPart >= Math.pow 10, decimalPoints
       decimalPart -= Math.pow 10, decimalPoints
       wholePart += 1
-    wholePart = insertThousandSeparator wholePart
+    wholePart = insertThousandSeparator wholePart, thousandSeparator
     decimalPart = decimalPart.toString()
     while decimalPart.length < decimalPoints
       decimalPart = "0" + decimalPart
     "#{wholePart},#{decimalPart}"
   else
     wholePart = Math.round input
-    insertThousandSeparator wholePart
+    insertThousandSeparator wholePart, thousandSeparator
 
 
 insertThousandSeparator = (input, separator = ' ') ->
