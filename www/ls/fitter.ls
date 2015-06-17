@@ -5,8 +5,8 @@ ig.fit = ->
   $body = $ 'body'
   $hero = $ "<div class='hero'></div>"
     ..append "<div class='overlay'></div>"
-    ..append "<span class='copy'><span class='title'><em>Štěstí je na dosah („není za horami“)</em><br>nápis dvoumetrovými písmeny ve městě Permu.</span>fotografie CC BY <a href='https://www.flickr.com/photos/dmitry_kolesnikov/6842797721' target='_blank'>Dmitry Kolesnikov</a>, Flickr</span>"
-    # ..append "<a href='#' class='scroll-btn'>Číst dál</a>"
+    ..append "<span class='copy'><span class='title'><em>Syrští uprchlíci <a href='http://reportermagazin.cz/a-pred-nami-je-stesti/' target='_blank'>dopadení</a> egyptskou policií</em><br>na ostrůvku u přístavu Alexandrie.</span>foto: <a href='http://www.krupar.com/' target='_blank'>Stanislav Krupař</a></span>"
+    ..append "<a href='#' class='scroll-btn'>Číst dál</a>"
     ..find 'a.scroll-btn' .bind 'click touchstart' (evt) ->
       evt.preventDefault!
       offset = $filling.offset!top + $filling.height! - 50
@@ -15,7 +15,8 @@ ig.fit = ->
         .tween "scroll" scrollTween offset
   $body.prepend $hero
 
-  $ '#article h1' .html 'Kolik nás stojí a z čeho se skládá<br>&bdquo;Pevnost Evropa&#8221;'
+  $ '#article h1' .html 'Kolik nás stojí &bdquo;pevnost Evropa&#8221;'
+  $ '#article .perex' .html 'Za utěsnění hranic před uprchlíky zaplatí Evropané každý rok několik miliard eur. Dodavateli hi-tech zařízení, jež mají vlnu běženců z Afriky a Blízkého východu pomoci odrazit, je hrstka vybraných firem. Patnáct novinářů z devíti zemí pátralo po tom, jak tato opatření fungují, kdo na protiimigračních opatřeních Evropské unie <br>profituje – a kdo na ně doplácí.'
 
   $filling = $ "<div class='ig filling'></div>"
     ..css \height $hero.height! + 50
