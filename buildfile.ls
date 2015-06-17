@@ -58,6 +58,7 @@ build-script = (file, cb) ->
   require! child_process:{exec}
   (err, result) <~ exec "lsc -o #__dirname/www/js -c #__dirname/#file"
   if err
+    console.log "lsc -o #__dirname/www/js -c #__dirname/#file"
     console.error err
   cb err
 
