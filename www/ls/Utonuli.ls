@@ -15,7 +15,7 @@ class ig.Utonuli
   setMarkerRadii: ->
     zoom = @map.getZoom!
     zoomFromStart = Math.max 0, zoom - 3
-    rangeStart = Math.min
+    rangeStart = Math.min do
       2 ^ zoomFromStart
       8
     @radiusScale.range [rangeStart, 70 * (zoomFromStart || 1)]
