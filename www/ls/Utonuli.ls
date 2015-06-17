@@ -15,7 +15,11 @@ class ig.Utonuli
   setMarkerRadii: ->
     zoom = @map.getZoom!
     zoomFromStart = Math.max 0, zoom - 3
-    @radiusScale.range [2 ^ zoomFromStart, 70 * (zoomFromStart || 1)]
+    rangeStart = Math.min
+      2 ^ zoomFromStart
+      8
+    @radiusScale.range [rangeStart, 70 * (zoomFromStart || 1)]
+    console.log @radiusScale.range!
     @points.forEach ~>
       it.marker.setRadius @radiusScale it.incident.deaths
 
