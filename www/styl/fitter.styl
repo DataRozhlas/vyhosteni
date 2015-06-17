@@ -14,24 +14,24 @@ overlayTextColor = white
   > h1
     font-size 36px !important
     font-weight 300
-    margin-top 34px !important
+    margin-top 14px !important
     line-height 67.9px
     margin-bottom 40px !important
     color overlayTextColor
     text-shadow 0px 0px 10px #0
     position absolute
     margin-left 100px !important
-    text-align right
+    text-align left
     z-index 40
   p.perex
     position absolute
-    top 178px
-    left 600px
-    width (950px - 600px)
+    top 320px
+    left 100px
+    width 445px
     font-weight 100
     text-align left
-    line-height 45px
-    font-size 20px
+    line-height 41px
+    font-size 18px
     color overlayTextColor
     text-shadow 0px 0px 10px #0
     margin 0px
@@ -40,6 +40,11 @@ overlayTextColor = white
   > ul > li
     line-height 1.9em
     font-size 16px
+    a
+      text-decoration underline
+      color desaturate(ColorLink, 30%) !important
+      &:hover
+        text-decoration none
   > h2
   > h3
   > p
@@ -49,11 +54,10 @@ overlayTextColor = white
     float left
     margin-right 0px
   > ul
-    margin 0px 0px 15px 0px
     list-style square
     > li
       padding-left 17px
-      // margin-left 26px !important
+      margin-left 26px !important
       margin-bottom 5px !important
   h2
     font-size 28px
@@ -107,17 +111,12 @@ overlayTextColor = white
     width 980px
   p iframe
     max-width none
-    border-top 1px solid #c
-    border-bottom 1px solid #c
     padding-top 20px
     margin 20px 0px
     position relative
-    left -450px
-  > p:last-of-type
-    margin-top 50px
-    border-top 1px solid #a
-    padding-top 20px
-    font-size 14px
+    left -296px
+    &.small
+      left 0px
 
 .author
   margin-top 60px !important
