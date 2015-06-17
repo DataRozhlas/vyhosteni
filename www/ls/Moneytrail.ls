@@ -1,11 +1,9 @@
 class ig.Moneytrail
   (@parentElement) ->
     @data = @getData!
-    console.log @data.i18n
     @scale = d3.scale.linear!
       ..domain [0 11300000000]
       ..range [0 2200]
-    console.log @data.children.length
     @element = @parentElement.append \div
       ..attr \class \moneytrail
       ..selectAll \.col .data @data.children .enter!append \div
@@ -18,13 +16,22 @@ class ig.Moneytrail
           ..html ~>
             num = ig.utils.formatNumber it.amount / 1e6, 0, @data.i18n.thousands_separator, @data.i18n.decimal_separator
             "#num #{@data.i18n.millions} €"
-        ..append \span
-          ..attr \class \text
-          ..style \bottom ~> "#{@scale it.amount}px"
-          ..html (.text)
         ..append \div
           ..attr \class \area
           ..style \height ~> "#{@scale it.amount}px"
+          ..selectAll \div.sub .data (-> it.subnodes || []) .enter!append \div
+            ..attr \class \sub
+            ..attr \data-size (d, i, ii) ~> "#{(d.amount / @data.children[ii].amount) * 100}%"
+        ..append \div
+          ..attr \class \text
+          ..style \bottom ~> "#{@scale it.amount}px"
+          ..html (.text)
+          ..selectAll \div.sub-title .data (-> it.subnodes || []) .enter!append \div
+            ..attr \class \sub-title
+            ..append \h2
+              ..html ~> "#{it.title}: #{ig.utils.formatNumber it.amount / 1e6, 0, @data.i18n.thousands_separator} #{@data.i18n.millions_abbrev} €"
+            ..append \span
+              ..html -> it.text
 
   getData: ->
     ig.data.moneytrail

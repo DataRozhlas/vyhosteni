@@ -1,6 +1,6 @@
 .moneytrail
   position relative
-  height 550px
+  height 700px
   clear left
   margin-bottom 30px
   .col
@@ -19,6 +19,10 @@
       padding 0px 5px
       transition opacity 0.4s
       pointer-events none
+      .sub-title
+        h2
+          font-size 14px
+          margin 8px 0px 0px 0px
     .title
     .value
       text-align center
@@ -45,11 +49,16 @@
       border-top-right-radius 5px
       border-top-left-radius 5px
       transition background-color 0.4s
+      .sub
+        opacity 0
+        transition opacity 0.4s
     &:hover
       .text
         opacity 1
       .area
         background lighten(desaturate(ColorBlue, 80%), 90%)
+        .sub
+          opacity 1
     &:first-child
       .text
         margin-left 0px
@@ -57,5 +66,67 @@
       .text
         bottom 195px !important
         right 50%
-
+    &:nth-child(3)
+      .text
+        .sub-title
+          color desaturate(ColorRed, 50%)
+          h2
+            color ColorRed
+      .area
+        .sub
+          box-sizing content-box
+          width 61.3%
+          height 100%
+          margin-top -2px
+          background ColorRed
+          border-top 2px solid darken(ColorRed, 20%)
+          border-top-left-radius 5px
+          position relative
+    &:nth-child(5)
+      .text
+        .sub-title
+          color desaturate(ColorRed, 50%)
+          h2
+            color ColorRed
+      .area
+        .sub
+          width 100%
+          height 61.3%
+          background ColorRed
+          position absolute
+          border-top-right-radius 5px
+          border-top-left-radius 5px
+          border-top 2px solid darken(ColorRed, 20%)
+          bottom 0px
+    &:nth-child(6)
+      .text
+        .sub-title
+          color desaturate(ColorRed, 50%)
+          h2
+            color ColorRed
+        .sub-title:last-child
+          color desaturate(ColorBlue, 50%)
+          h2
+            color ColorBlue
+      .area
+        .sub
+          width 100%
+          height 7px
+          background ColorRed
+          position absolute
+          border-top-right-radius 5px
+          border-top-left-radius 5px
+          border-top 2px solid darken(ColorRed, 20%)
+          bottom 68%
+          z-index 4
+        .sub:last-child
+          width 100%
+          height 70.14%
+          background ColorBlue
+          position absolute
+          border-top-right-radius 5px
+          border-top-left-radius 5px
+          border-top 2px solid darken(ColorBlue, 20%)
+          bottom 0px
+          z-index 5
 
